@@ -40,4 +40,4 @@ def crawl_web(seed):
 		if page not in crawled:
 			union(tocrawl, get_all_links(get_page(page)))
 			crawled.append(page)
-	return crawled
+	return craw
