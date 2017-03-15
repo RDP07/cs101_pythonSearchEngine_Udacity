@@ -40,4 +40,14 @@ def crawl_web(seed):
 		if page not in crawled:
 			union(tocrawl, get_all_links(get_page(page)))
 			crawled.append(page)
-	return craw
+	return crawled
+
+index = []
+
+def add_to_index(index,keyword,url)
+	new = [keyword, [url]]
+	for entry in index:
+		if entry[0] == keyword:
+			entry[1].append(url)
+			return
+	index.append(new)
