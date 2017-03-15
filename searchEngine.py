@@ -57,3 +57,8 @@ def lookup(index,keyword):
 		if search[0] == keyword:
 			return search[1]
 	return []
+
+def add_page_to_index(index,url,content):
+	words = content.split()
+	for word in words:
+		add_to_index(index, word, url)
