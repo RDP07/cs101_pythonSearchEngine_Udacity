@@ -35,12 +35,15 @@ def get_all_links(page):
 def crawl_web(seed):
 	tocrawl = [seed]
 	crawled = []
+	index = []
 	while tocrawl: 
 		page = tocrawl.pop()
 		if page not in crawled:
-			union(tocrawl, get_all_links(get_page(page)))
+			content = get_page(page)
+			add_page_to_index(index,page,content)
+			union(tocrawl, get_all_links(content))
 			crawled.append(page)
-	return crawled
+	return index
 
 index = []
 
@@ -62,3 +65,4 @@ def add_page_to_index(index,url,content):
 	words = content.split()
 	for word in words:
 		add_to_index(index, word, url)
+
