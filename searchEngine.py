@@ -47,7 +47,7 @@ def crawl_web(seed):
 
 index = []
 
-def add_to_index(index,keyword,url)
+def add_to_index(index,keyword,url):
 	new = [keyword, [url]]
 	for entry in index:
 		if entry[0] == keyword:
@@ -65,4 +65,7 @@ def add_page_to_index(index,url,content):
 	words = content.split()
 	for word in words:
 		add_to_index(index, word, url)
+
+
+
 
