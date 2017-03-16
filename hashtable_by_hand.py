@@ -9,8 +9,8 @@ def make_hashtable(nbuckets):
 def hash_string(keyword, buckets):
 	out = 0 
 	for c in keyword:
-		out = (out + ord(c)) % buckets
-	return out
+		out = (out + ord(c))
+	return out % buckets
 
 def hashtable_get_bucket(htable, keyword):
 	return htable[hash_string(keyword, len(htable))]
