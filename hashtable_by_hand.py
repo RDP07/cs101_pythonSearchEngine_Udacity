@@ -25,6 +25,16 @@ def hashtable_lookup(htable, key):
 			return i[1]
 	return None
 
+def hashtable_update(htable, key, value):
+	bucket = hashtable_get_bucket(htable, key)
+	if hashtable_lookup(htable, key) == None:
+		bucket.append([key, value])
+	for i in bucket: 
+		if i[0] == key:
+			i[1] = value
+		return htable
+	hashtable_add(htable, key, value)
+
 ##Data to for testing below
 
 table = make_hashtable(5)
@@ -40,3 +50,10 @@ print table
 
 print hashtable_lookup(table, 'Bill')
 print hashtable_lookup(table, 'Coach')
+
+
+hashtable_update(table, 'Rochelle', 94)
+hashtable_update(table, 'Zed', 68)
+hashtable_update(table, 'Luke', 7)
+
+print table
