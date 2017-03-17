@@ -18,6 +18,13 @@ def hashtable_get_bucket(htable, keyword):
 def hashtable_add(htable, key, value):
 	hashtable_get_bucket(htable, key).append([key, value])
 
+def hashtable_lookup(htable, key):
+	bucket = hashtable_get_bucket(htable, key)
+	for i in bucket:
+		if i[0] == key:
+			return i[1]
+	return None
+
 ##Data to for testing below
 
 table = make_hashtable(5)
@@ -30,3 +37,6 @@ hashtable_add(table,'Louis', 29)
 hashtable_add(table,'Nick', 2)
 
 print table
+
+print hashtable_lookup(table, 'Bill')
+print hashtable_lookup(table, 'Coach')
