@@ -35,36 +35,38 @@ def get_all_links(page):
 def crawl_web(seed):
 	tocrawl = [seed]
 	crawled = []
-	index = []
+	index = {}
 	while tocrawl: 
 		page = tocrawl.pop()
 		if page not in crawled:
 			content = get_page(page)
 			add_page_to_index(index,page,content)
-			union(tocrawl, get_all_links(content))
+			set().union(tocrawl, get_all_links(content))
 			crawled.append(page)
 	return index
 
-index = []
+index = {}
 
 def add_to_index(index,keyword,url):
-	new = [keyword, [url]]
-	for entry in index:
-		if entry[0] == keyword:
-			entry[1].append(url)
-			return
-	index.append(new)
+	if keyword in index:
+		index[keyword].append(url)
+	else:
+		index[keyword] = [url]
 
 def lookup(index,keyword):
-	for search in index:
-		if search[0] == keyword:
-			return search[1]
-	return []
+	if keyword in index:
+		return index[keyword]
+	return None
 
 def add_page_to_index(index,url,content):
 	words = content.split()
 	for word in words:
 		add_to_index(index, word, url)
+
+crawl_web('http://xkcd.com/353')
+
+
+
 
 
 
