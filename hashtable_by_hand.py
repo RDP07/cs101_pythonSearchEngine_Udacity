@@ -18,6 +18,12 @@ def hashtable_get_bucket(htable, keyword):
 def hashtable_add(htable, key, value):
 	hashtable_get_bucket(htable, key).append([key, value])
 
+def entry_in_bucket(bucket, key):
+	for entry in bucket:
+		if entry[0] == key:
+			return entry
+	return None
+
 def hashtable_lookup(htable, key):
 	bucket = hashtable_get_bucket(htable, key)
 	for i in bucket:
