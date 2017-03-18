@@ -26,20 +26,18 @@ def entry_in_bucket(bucket, key):
 
 def hashtable_lookup(htable, key):
 	bucket = hashtable_get_bucket(htable, key)
-	for i in bucket:
-		if i[0] == key:
-			return i[1]
+	entry = entry_in_bucket(bucket, key)
+	if entry:
+		return entry[1]
 	return None
 
 def hashtable_update(htable, key, value):
 	bucket = hashtable_get_bucket(htable, key)
-	if hashtable_lookup(htable, key) == None:
+	entry = entry_in_bucket(bucket, key)
+	if entry:
+		entry[1] = value
+	else:
 		bucket.append([key, value])
-	for i in bucket: 
-		if i[0] == key:
-			i[1] = value
-		return htable
-	hashtable_add(htable, key, value)
 
 ##Data to for testing below
 
