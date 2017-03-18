@@ -25,8 +25,7 @@ def entry_in_bucket(bucket, key):
 	return None
 
 def hashtable_lookup(htable, key):
-	bucket = hashtable_get_bucket(htable, key)
-	entry = entry_in_bucket(bucket, key)
+	entry = entry_in_bucket(hashtable_get_bucket(htable, key), key)
 	if entry:
 		return entry[1]
 	return None
