@@ -201,7 +201,20 @@ def compute_ranks(graph):
 		ranks = newranks
 	return ranks
 
+def best_rank(index, ranks, keyword):
+	pages = lookup(index, keyword)
+	if not pages:
+		return None
+	best_page = pages[0]
+	for page in pages:
+		if ranks[page] > ranks[best_page]:
+			best_page = page
+	return best_page
+
 index, graph = crawl_web('http://udacity.com/cs101x/urank/index.html')
 ranks = compute_ranks(graph)
 print ranks
+print best_rank(index, ranks, 'Hummus')
+
+print lookup(index, "expert")
 
