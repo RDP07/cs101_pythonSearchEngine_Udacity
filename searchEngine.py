@@ -142,6 +142,11 @@ def get_all_links(page):
 			break
 	return links
 
+def union(a, b):
+    for e in b:
+        if e not in a:
+            a.append(e)
+
 def crawl_web(seed):
 	tocrawl = [seed]
 	crawled = []
@@ -154,7 +159,7 @@ def crawl_web(seed):
 			add_page_to_index(index,page,content)
 			outlinks = get_all_links(content)
 			graph[page] = outlinks
-			set().union(tocrawl, outlinks)
+			union(tocrawl, outlinks)
 			crawled.append(page)
 	return index, graph
 
@@ -182,7 +187,7 @@ def compute_ranks(graph):
 	ranks = {}
 	npages = len(graph)
 
-	for page in ranks:
+	for page in graph:
 		ranks[page] = 1.0 / npages
 
 	for i in range(0, numloops):
@@ -196,10 +201,7 @@ def compute_ranks(graph):
 		ranks = newranks
 	return ranks
 
-index , graph = crawl_web('http://udacity.com/cs101x/urank/index.html') 
-
+index, graph = crawl_web('http://udacity.com/cs101x/urank/index.html')
 ranks = compute_ranks(graph)
 print ranks
-if 'http://udacity.com/cs101x/urank/index.html' in graph:
-    print graph['http://udacity.com/cs101x/urank/index.html']
 
