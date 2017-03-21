@@ -116,14 +116,11 @@ Hummus Recipe
 """, 
 }
 
-
 def get_page(url):
 	if url in cache:
 		return cache[url]
 	else:
 		return None
-
-
 
 def get_next_target(page):
 	start_link = page.find('<a href=')
@@ -178,6 +175,24 @@ def add_page_to_index(index,url,content):
 	words = content.split()
 	for word in words:
 		add_to_index(index, word, url)
+
+def compute_ranks(graph):
+	d = 0.8 #damping
+	numloops = 10
+	ranks = {}
+	npages = len(graph)
+	
+	for page in ranks:
+		ranks[page] = 1.0 / npages
+
+	for i in range(0, numloops):
+		newranks = {}
+		for page in graph:
+			newrank = (1 - d) / npages
+			for node in graph:
+				if page in graph[node]:
+					newrank = newrank + d * (ranks[node] / len(graph[node]))
+			newranks[page] = newrank
 
 index , graph = crawl_web('http://udacity.com/cs101x/urank/index.html') 
 
