@@ -181,7 +181,7 @@ def compute_ranks(graph):
 	numloops = 10
 	ranks = {}
 	npages = len(graph)
-	
+
 	for page in ranks:
 		ranks[page] = 1.0 / npages
 
@@ -193,10 +193,13 @@ def compute_ranks(graph):
 				if page in graph[node]:
 					newrank = newrank + d * (ranks[node] / len(graph[node]))
 			newranks[page] = newrank
+		ranks = newranks
+	return ranks
 
 index , graph = crawl_web('http://udacity.com/cs101x/urank/index.html') 
 
-
+ranks = compute_ranks(graph)
+print ranks
 if 'http://udacity.com/cs101x/urank/index.html' in graph:
     print graph['http://udacity.com/cs101x/urank/index.html']
 
